@@ -9,5 +9,5 @@ def matrix_shape(matrix):
     for i in matrix:
         shape.append(len(i))
     shape = list(set(shape))
-    shape.append(len(matrix)
+    shape.append(len(matrix))
     return shape
