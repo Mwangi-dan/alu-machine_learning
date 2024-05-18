@@ -9,16 +9,13 @@ def cat_matrices2D(mat1, mat2, axis=0):
     Returns
     n_matrix: concatenate matrix along a specific axis
     """
-    cat = __import__('6-howdy_partner').cat_arrays
-
-    n_matrix = []
     if axis == 0:
-        n_matrix.append(cat(mat1, mat2))
-
-        return n_matrix
-    elif axis > 0:
-        for i in range(len(mat1)):
-            n_matrix.append(mat1[i] + mat2[i])
-        return n_matrix
+        if len(mat1[0]) != len(mat2[0]):
+            return None
+        return mat1 + mat2
+    elif axis == 1:
+        if len(mat1) != len(mat2):
+            return None
+        return [row1 + row2 for row1, row2 in zip(mat1, mat2)]
     else:
         return None
