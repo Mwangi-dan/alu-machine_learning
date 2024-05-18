@@ -5,12 +5,12 @@ Function that calculates the shape of a matrix
 
 
 def matrix_shape(matrix):
-"""
-Matrix -> list of list(s)
+    """
+    Matrix -> list of list(s)
 
-Returns:
-shape: List of integers
-"""
+    Returns:
+    shape: List of integers
+    """
     n_matrix = matrix
     shape = []
     while isinstance(n_matrix, list):
