@@ -5,6 +5,9 @@ Function that calculates the shape of a matrix
 
 
 def matrix_shape(matrix):
-    r = len(matrix)
-    c = len(matrix[0])
-    return [r, c]
+    shape = []
+    for i in matrix:
+        shape.append(len(i))
+    shape = list(set(shape))
+    shape.append(len(matrix)
+    return shape
