@@ -12,7 +12,4 @@ def np_elementwise(mat1, mat2):
     Returns
     (add, sub, mul, div): (tuple)
     '''
-    return (np.sum(mat1, mat2),
-            np.subtract(mat1, mat2),
-            np.multiply(mat1, mat2),
-            np.divide(mat1, mat2))
+    return (mat1 + mat2, mat1 - mat2, mat1 * mat2, mat1 / mat2)
