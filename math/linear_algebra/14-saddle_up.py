@@ -10,4 +10,4 @@ def np_matmul(mat1, mat2):
     '''
     matrix multiplication
     '''
-    return np.multiply(mat1, mat2)
+    return np.matmul(mat1, mat2)
