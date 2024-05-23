@@ -15,4 +15,14 @@ def inverse(matrix):
     det_matrix = det(matrix)
     adj_matrix = adj(matrix)
 
-    return (1/det_matrix) * adj_matrix
+    if det_matrix == 0:
+        return None
+
+    inv = []
+    for row in adj_matrix:
+        new_row = []
+        for j in row:
+            new_row.append(j/det_matrix)
+        inv.append(new_row)
+
+    returnn inv
