@@ -35,7 +35,7 @@ def determinant(matrix):
     det = 0
     for col in range(height):
         minor = get_minor(matrix, 0, col)
-        cofactor = ((-1) ** col) * matrix[0][col]
+        cofactor = ((-1) ** col) * matrix[0][col] * determinant(minor)
         det += cofactor
 
     return det
