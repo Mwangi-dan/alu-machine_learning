@@ -33,7 +33,7 @@ def determinant(matrix):
         return [row[:j] + row[j+1:] for row in (matrix[:i] + matrix[i+1:])]
 
     det = 0
-    for col in range(n):
+    for col in range(height):
         minor = get_minor(matrix, 0, col)
         cofactor - ((-1) ** col) * matrix[0][col]
         det += cofactor
