@@ -25,4 +25,4 @@ def inverse(matrix):
             new_row.append(j/det_matrix)
         inv.append(new_row)
 
-    returnn inv
+    return inv
