@@ -23,9 +23,9 @@ def cofactor(matrix):
     minor_mat = minor(matrix)
     co_mat = []
 
-    for i in height:
+    for i in range(height):
         cof_row = []
-        for j in height:
+        for j in range(height):
             sign = (-1) ** (i + j)
             cofactor = sign * minor_mat[i][j]
             cof_row.append(cofactor)
