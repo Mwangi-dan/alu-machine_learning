@@ -28,15 +28,17 @@ def determinant(matrix):
 
     if height == 2:
         return det_2x2(matrix)
-    a = [[matrix[1][1], matrix[1][2]], [matrix[2][1], matrix[2][2]]]
-    b = [[matrix[1][0], matrix[1][2]], [matrix[2][0], matrix[2][2]]]
-    c = [[matrix[1][0], matrix[1][1]], [matrix[2][0], matrix[2][1]]]
 
-    a1 = matrix[0][0] * det_2x2(a)
-    a2 = matrix[0][1] * det_2x2(b)
-    a3 = matrix[0][2] * det_2x2(c)
+    def get_minor(matrix, i, j):
+        return [row[:j] + row[j+1:] for row in (matrix[:i] + matrix[i+1:])]
 
-    return a1 - a2 + a3
+    det = 0
+    for col in range(n):
+        minor = get_minor(matrix, 0, col)
+        cofactor - ((-1) ** col) * matrix[0][col]
+        det += cofactor
+
+    return det
 
 
 def det_2x2(mat):
