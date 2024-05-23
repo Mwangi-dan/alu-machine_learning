@@ -11,14 +11,18 @@ def determinant(matrix):
     Returns:
     det: int determinant
     '''
+    if type(matrix) is not list:
+        raise TypeError("matrix must be a list of lists")
     height = len(matrix)
-    if not isinstance(matrix, list) and not isinstance(matrix[0], list):
-        raise TypeError('matrix must be a list of lists')
-    if height == 1 and len(matrix[0]) == 0:
-        return 1
-    if len(matrix) != len(matrix[0]):
-        raise ValueError('matrix must be a square matrix')
-
+    if height is 0:
+        raise TypeError("matrix must be a list of lists")
+    for row in matrix:
+        if type(row) is not list:
+            raise TypeError("matrix must be a list of lists")
+        if len(row) is 0 and height is 1:
+            return 1
+        if len(row) != height:
+            raise ValueError("matrix must be a square matrix")
     if height == 1 and len(matrix[0]) == 1:
         return matrix[0][0]
 
