@@ -9,7 +9,7 @@ def adjugate(matrix):
     Returns:
     adj: (list) transposed cofactor matrix
     '''
-    cofactor = __import__.('2-cofactor').cofactor
+    cofactor = __import__('2-cofactor').cofactor
 
     cof = cofactor(matrix)
 
