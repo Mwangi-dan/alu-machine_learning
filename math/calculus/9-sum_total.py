@@ -2,7 +2,6 @@
 """
 Summation function
 """
-import math
 
 
 def summation_i_squared(n):
@@ -11,6 +10,6 @@ def summation_i_squared(n):
     Returns:
     sum: (int) summation
     """
-    if not n or type(n) != int:
+    if n < 1 or type(n) != int:
         return None
-    return math.factorial(n)
+    return int((n * (n + 1) * ((2 * n) + 1)/6
