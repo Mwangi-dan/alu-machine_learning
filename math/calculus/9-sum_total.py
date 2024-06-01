@@ -12,4 +12,4 @@ def summation_i_squared(n):
     """
     if n < 1 or type(n) != int:
         return None
-    return int((n * (n + 1) * ((2 * n) + 1)/6))
+    return ((n * (n + 1) * ((2 * n) + 1)/6))
