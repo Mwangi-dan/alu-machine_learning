@@ -22,14 +22,10 @@ class Normal:
                 raise ValueError("stddev must be a positive value")
         else:
             if isinstance(data, list):
-                if len(data) >= 2:
+                if len(data) > 1:
                     self.data = data
-                    self.mean = float(mean)
-                    if stddev > 0:
-                        self.stddev = float(stddev)
-                        self.mean = float(mean)
-                    else:
-                        raise ValueError("stddev must be a positive value")
+                    self.mean = sum(data) / len(data)
+                    self.stddev = (sum([(x - self.mean) ** 2 for x in data]) / len(data)) ** 0.5
                 else:
                     raise ValueError("data must contain multiple values")
             else:
