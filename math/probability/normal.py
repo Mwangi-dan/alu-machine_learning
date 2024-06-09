@@ -24,8 +24,8 @@ class Normal:
             if isinstance(data, list):
                 if len(data) >= 2:
                     self.data = data
-                    self.mean = mean
-                    self.stddev = stddev
+                    self.mean = float(mean)
+                    self.stddev = float(stddev) if stddev > 0 else 1. 
                 else:
                     raise ValueError("data must contain multiple values")
             else:
