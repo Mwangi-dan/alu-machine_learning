@@ -58,7 +58,7 @@ class Poisson:
             k = int(k)
         if k < 0:
             return 0
-        return ((self.lamtha ** k) *
+        return ((self.lambtha ** k) *
                 (e ** (-self.lambtha))) / self.factorial(k)
 
     def cdf(self, k):
