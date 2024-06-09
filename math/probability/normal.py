@@ -25,7 +25,11 @@ class Normal:
                 if len(data) >= 2:
                     self.data = data
                     self.mean = float(mean)
-                    self.stddev = float(stddev) if stddev > 0 else 1. 
+                    if stddev > 0:
+                        self.stddev = float(stddev)
+                        self.mean = float(mean)
+                    else:
+                        raise ValueError("stddev must be a positive value")
                 else:
                     raise ValueError("data must contain multiple values")
             else:
