@@ -63,8 +63,9 @@ class Normal:
         Returns:
         PDF value for x
         """
+        z = self.z_score(x)
         den = self.stddev * ((2 * pi) ** 0.5)
-        num = e ** -1 * ((x - self.mean) ** 2) / ((2 * (self.stddev ** 2)))
+        num = e ** -1 * ((x - self.mean) ** 2) / ((2 * (z ** 2)))
         return num / den
 
     def cdf(self, x):
