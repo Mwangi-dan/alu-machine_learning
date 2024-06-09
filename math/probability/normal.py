@@ -15,7 +15,7 @@ class Normal:
         Class constructor
         """
         if data is None:
-            if stddev <= 0:
+            if stddev > 0:
                 self.stddev = float(stddev)
                 self.mean = float(mean)
             else:
