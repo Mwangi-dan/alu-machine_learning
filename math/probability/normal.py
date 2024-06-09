@@ -40,7 +40,7 @@ class Normal:
         Returns:
         Z-score of x
         """
-        return (x - self.lambtha) / self.stddev
+        return (x - self.mean) / self.stddev
 
     def x_value(self, z):
         """
