@@ -22,7 +22,7 @@ class Normal:
                 raise ValueError("stddev must be a positive value")
         else:
             if isinstance(data, list):
-                if len(data) > 2:
+                if len(data) >= 2:
                     self.data = data
                     self.mean = mean
                     self.stddev = stddev
