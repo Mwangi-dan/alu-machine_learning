@@ -65,7 +65,8 @@ class Normal:
         """
         z = self.z_score(x)
         den = self.stddev * ((2 * pi) ** 0.5)
-        num = e ** -1 * ((x - self.mean) ** 2) / ((2 * (z ** 2)))
+        power = -1 * (z ** 2) / 2
+        num = e ** power
         return num / den
 
     def cdf(self, x):
