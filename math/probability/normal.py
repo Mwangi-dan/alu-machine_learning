@@ -64,8 +64,9 @@ class Normal:
         PDF value for x
         """
         den = self.stddev * ((2 * pi) ** 0.5)
-        num = e ** -((x - self.mean) ** 2) / ((2 * (self.stddev ** 2)))
+        num = e ** -1 * ((x - self.mean) ** 2) / ((2 * (self.stddev ** 2)))
         return num / den
+
     def cdf(self, x):
         """
         Calculates the value of the CDF for a given x value
