@@ -3,8 +3,6 @@
     class MultiNormal that represents
     a Multivariate Normal distribution:
 """
-
-
 import numpy as np
 
 

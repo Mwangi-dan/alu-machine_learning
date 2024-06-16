@@ -2,8 +2,6 @@
 '''
 Module that calculates the correlation matrix of a data set
 '''
-
-
 import numpy as np
 
 

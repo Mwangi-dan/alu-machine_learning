@@ -7,7 +7,6 @@ import numpy as np
 
 def mean_cov(X):
     """
-    
     X - numpy.ndarray of shape (n, d) containing the data set
     n - number of data points
     d - number of dimensions in each data point
