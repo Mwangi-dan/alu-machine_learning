@@ -1,32 +1,28 @@
 #!/usr/bin/env python3
 """
-Same Convolution
+Valid Convolution
 """
 
 import numpy as np
 
-def convolve_grayscale_same(images, kernel):
+def convolve_grayscale_padding(images, kernel, padding):
     """
-    Function to perform same convolution on grayscale images
+    Function that performs
+    Valid Convolution with custom Padding
     """
     m = images.shape[0]
     height = images.shape[1]
     width = images.shape[2]
     kh = kernel.shape[0]
     kw = kernel.shape[1]
-    if kh % 2 == 1:
-        ph = (kh - 1) // 2
-    else:
-        ph = kh // 2
-    if kw % 2 == 1:
-        pw = (kw - 1) // 2
-    else:
-        pw = kw // 2
+    ph, pw = padding
     images = np.pad(images, ((0, 0), (ph, ph), (pw, pw)),
                     'constant', constant_values=0)
-    convoluted = np.zeros((m, height, width))
-    for h in range(height):
-        for w in range(width):
+    ch = height + (2 * ph) - kh + 1
+    cw = width + (2 * pw) - kw + 1
+    convoluted = np.zeros((m, ch, cw))
+    for h in range(ch):
+        for w in range(cw):
             output = np.sum(images[:, h: h + kh, w: w + kw] * kernel,
                             axis=1).sum(axis=1)
             convoluted[:, h, w] = output
