@@ -5,6 +5,7 @@ Strided Convolution
 
 import numpy as np
 
+
 def convolve_grayscale(images, kernel, padding='same', stride=(1, 1)):
     """
     Function performs convolution on grayscale images

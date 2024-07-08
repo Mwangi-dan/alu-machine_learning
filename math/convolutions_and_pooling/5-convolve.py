@@ -5,6 +5,7 @@ Multiple kernels
 
 import numpy as np
 
+
 def convolve(images, kernels, padding='same', stride=(1, 1)):
     """
     performs a convolution on images using multiple kernels

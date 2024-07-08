@@ -5,6 +5,7 @@ Valid Convolution
 
 import numpy as np
 
+
 def convolve_grayscale_padding(images, kernel, padding):
     """
     Function that performs

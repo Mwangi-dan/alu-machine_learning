@@ -5,6 +5,7 @@ Pooling
 
 import numpy as np
 
+
 def pool(images, kernel_shape, stride, mode='max'):
     """
     Performs pooling on images

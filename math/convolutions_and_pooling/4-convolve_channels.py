@@ -5,6 +5,7 @@ Convolution with channels
 
 import numpy as np
 
+
 def convolve_channels(images, kernel, padding='same', stride=(1, 1)):
     """
     Function that performs a convolution on images with channels:
