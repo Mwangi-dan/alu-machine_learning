@@ -3,6 +3,7 @@
 Module that holds the class of 'Neuron'
 """
 
+import numpy as np
 
 class Neuron:
     """
