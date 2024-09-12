@@ -5,6 +5,7 @@ Module that holds the class of 'Neuron'
 
 import numpy as np
 
+
 class Neuron:
     """
     class that defines a single Neuron performinh binary classification
