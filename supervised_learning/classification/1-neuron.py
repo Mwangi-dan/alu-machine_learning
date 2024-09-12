@@ -44,7 +44,7 @@ class Neuron:
         Getter function for b
         """
         return self.__b
-    
+
     # getter function - A
     @property
     def A(self):
