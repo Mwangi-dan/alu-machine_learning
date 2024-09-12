@@ -16,7 +16,7 @@ class Neuron:
         try:
             if type(nx) is not int:
                 raise TypeError
-            if nx < 1:
+            elif nx < 1:
                 raise ValueError
         except TypeError:
             print("nx must be an integer")
