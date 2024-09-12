@@ -30,7 +30,7 @@ class Neuron:
         self.__A = 0
 
 
-    # getter function for W
+    # getter function - W
     @property
     def W(self):
         """
@@ -39,7 +39,7 @@ class Neuron:
         return self.__W
 
 
-    # getter function for b
+    # getter function - b
     @property
     def b(self):
         """
@@ -48,7 +48,7 @@ class Neuron:
         return self.__b
     
 
-    # getter function for A
+    # getter function - A
     @property
     def A(self):
         """
