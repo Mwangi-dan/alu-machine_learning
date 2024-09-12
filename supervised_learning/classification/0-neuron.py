@@ -28,3 +28,30 @@ class Neuron:
         self.__W = np.random.normal(size=(1, nx))
         self.__b = 0
         self.__A = 0
+
+
+    # getter function for W
+    @property
+    def W(self):
+        """
+        Getter function for W
+        """
+        return self.__W
+
+
+    # getter function for b
+    @property
+    def b(self):
+        """
+        Getter function for b
+        """
+        return self.__b
+    
+
+    # getter function for A
+    @property
+    def A(self):
+        """
+        Getter function for A
+        """
+        return self.__A
