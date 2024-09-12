@@ -55,7 +55,7 @@ class Neuron:
 
 
     def forward_prop(self, x):
-        """git 
+        """
         Method that calculates the forward propagation of the neuron
         """
         self.__A = 1 / (1 + np.exp(-(np.matmul(self.__W, x) + self.__b)))
