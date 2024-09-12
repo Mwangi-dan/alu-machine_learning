@@ -24,6 +24,6 @@ class Neuron:
             print("nx must be a positive integer")
 
         self.nx = nx
-        self.__W = [0 for i in range(nx)]
+        self.__W = [0] * nx
         self.b = 0
         self.A = 0
