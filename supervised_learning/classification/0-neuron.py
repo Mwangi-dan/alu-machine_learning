@@ -24,6 +24,6 @@ class Neuron:
             print("nx must be a positive integer")
 
         self.nx = nx
-        self.W = [0] * nx
+        self.W = np.random.normal(size=nx)
         self.b = 0
         self.A = 0
