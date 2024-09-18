@@ -8,7 +8,6 @@ convolve_grayscale_valid = __import__('0-convolve_grayscale_valid').convolve_gra
 if __name__ == '__main__':
 
     dataset = np.load('./data/animals_1.npz')
-
     images = dataset['X_train']
     print(images.shape)
     kernel = np.array([[1 ,0, -1], [1, 0, -1], [1, 0, -1]])
