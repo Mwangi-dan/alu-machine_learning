@@ -6,7 +6,7 @@ Defining a Neural Network
 import numpy as np
 
 
-class NeuralNetork():
+class NeuralNetwork():
     """
     Neural Network with one hidden layer performing binary classification
     """
