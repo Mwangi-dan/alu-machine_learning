@@ -12,18 +12,23 @@ create_train_op = __import__('5-create_train_op').create_train_op
 forward_prop = __import__('2-forward_prop').forward_prop
 
 
-def train(X_train, Y_train, X_valid, Y_valid, layer_sizes, activations, alpha, iterations, save_path="/tmp/model.ckpt"):
+def train(X_train, Y_train, X_valid, Y_valid, layer_sizes,
+          activations, alpha, iterations, save_path="/tmp/model.ckpt"):
     """
     Builds, trains, and saves a neural network classifier
-    After every 100 iterations, the 0th iteration and `iterations` iteration:
-    - it prints the training, training accuracy, validation cost and validation accuracy
+    After every 100 iterations, the 0th iteration
+    and `iterations` iteration:
+    - it prints the training, training accuracy,
+    validation cost and validation accuracy
 
     X_train: numpy.ndarray containing the training input data
     Y_train: numpy.ndarray containing the training labels
     X_valid: numpy.ndarray containing the validation input data
     Y_valid: numpy.ndarray containing the validation labels
-    layer_sizes: list containing the number of nodes in each layer of the network
-    activations: list containing the activation functions for each layer of the network
+    layer_sizes: list containing the number of
+    nodes in each layer of the network
+    activations: list containing the activation
+    functions for each layer of the network
     alpha: learning rate
     iterations: number of iterations to train over
     save_path: designates where to save the model
@@ -38,7 +43,7 @@ def train(X_train, Y_train, X_valid, Y_valid, layer_sizes, activations, alpha, i
     loss = calculate_loss(y, y_pred)
     accuracy = calculate_accuracy(y, y_pred)
     train_op = create_train_op(loss, alpha)
-    
+
     saver = tf.train.Saver()
     with tf.Session() as sess:
         sess.run(tf.global_variables_initializer())
@@ -47,9 +52,11 @@ def train(X_train, Y_train, X_valid, Y_valid, layer_sizes, activations, alpha, i
             sess.run(train_op, feed_dict={x: X_train, y: Y_train})
             if i % 100 == 0 or i == iterations:
                 train_cost = sess.run(loss, feed_dict={x: X_train, y: Y_train})
-                train_accuracy = sess.run(accuracy, feed_dict={x: X_train, y: Y_train})
+                train_accuracy = sess.run(accuracy,
+                                          feed_dict={x: X_train, y: Y_train})
                 valid_cost = sess.run(loss, feed_dict={x: X_valid, y: Y_valid})
-                valid_accuracy = sess.run(accuracy, feed_dict={x: X_valid, y: Y_valid})
+                valid_accuracy = sess.run(accuracy,
+                                          feed_dict={x: X_valid, y: Y_valid})
                 print("After {} iterations:".format(i))
                 print("\tTraining Cost: {}".format(train_cost))
                 print("\tTraining Accuracy: {}".format(train_accuracy))
