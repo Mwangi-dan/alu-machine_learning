@@ -1,4 +1,4 @@
-#!/usr/bin env python3
+#!/usr/bin/env python3
 """
 Module with function that calculates accuracy of a function
 """
