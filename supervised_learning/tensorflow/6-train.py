@@ -62,5 +62,11 @@ def train(X_train, Y_train, X_valid, Y_valid, layer_sizes,
 
             if i < iterations:
                 sess.run(train_op, feed_dict={x: X_train, y: Y_train})
+        i += 1
+        loss_train, accuracy_train = sess.run(
+            [loss, accuracy], feed_dict={x: X_train, y: Y_train})
+        loss_valid, accuracy_valid = sess.run(
+            [loss, accuracy], feed_dict={x: X_valid, y: Y_valid})
+        accuracy_valid = sess.run(accuracy, feed_dict={x: X_valid, y: Y_valid})
 
         return saver.save(sess, save_path)
