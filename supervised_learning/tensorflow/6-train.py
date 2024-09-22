@@ -60,7 +60,7 @@ def train(X_train, Y_train, X_valid, Y_valid, layer_sizes,
                 print("\tValidation Cost: {}".format(v_loss))
                 print("\tValidation Accuracy: {}".format(v_accuracy))
 
-            if i < iterations:
+            if i < iterations +1:
                 sess.run(train_op, feed_dict={x: X_train, y: Y_train})
         i += 1
         loss_train, accuracy_train = sess.run(
