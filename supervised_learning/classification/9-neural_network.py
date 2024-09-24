@@ -42,50 +42,50 @@ class NeuralNetwork():
         self.__b2 = 0
         self.__A2 = 0
 
-        # Getter function - W1
-        @property
-        def W1(self):
-            """
-            Getter function for W1
-            """
-            return self.__W1
+    # Getter function - W1
+    @property
+    def W1(self):
+        """
+        Getter function for W1
+        """
+        return self.__W1
 
-        # Getter function - b1
-        @property
-        def b1(self):
-            """
-            Getter function for b1
-            """
-            return self.__b1
+    # Getter function - b1
+    @property
+    def b1(self):
+        """
+        Getter function for b1
+        """
+        return self.__b1
 
-        # Getter function - A1
-        @property
-        def A1(self):
-            """
-            Getter function for A1
-            """
-            return self.__A1
+    # Getter function - A1
+    @property
+    def A1(self):
+        """
+        Getter function for A1
+        """
+        return self.__A1
 
-        # Getter function - W2
-        @property
-        def W2(self):
-            """
-            Getter function for W2
-            """
-            return self.__W2
+    # Getter function - W2
+    @property
+    def W2(self):
+        """
+        Getter function for W2
+        """
+        return self.__W2
 
-        # Getter function - b2
-        @property
-        def b2(self):
-            """
-            Getter function for b2
-            """
-            return self.__b2
+    # Getter function - b2
+    @property
+    def b2(self):
+        """
+        Getter function for b2
+        """
+        return self.__b2
 
-        # Getter function - A2
-        @property
-        def A2(self):
-            """
-            Getter function for A2
-            """
-            return self.__A2
+    # Getter function - A2
+    @property
+    def A2(self):
+        """
+        Getter function for A2
+        """
+        return self.__A2
