@@ -20,5 +20,5 @@ def l2_reg_cost(cost, lambtha, weights, L, m):
     """
     norm = 0
     for i in range(1, L + 1):
-        norm += tf.nn.l2_loss(weights['W' + str(i)])
+        norm += np.linalg.norm(weights['W' + str(i)])
     return cost + (lambtha / (2 * m)) * norm
