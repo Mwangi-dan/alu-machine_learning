@@ -3,7 +3,6 @@
 Forward propagation using Dropout
 """
 
-import tensorflow as tf
 import numpy as np
 
 
@@ -25,15 +24,15 @@ def dropout_forward_prop(X, weights, L, keep_prob):
         W = weights['W' + str(i)]
         b = weights['b' + str(i)]
         A = cache['A' + str(i - 1)]
-        Z = tf.matmul(W, A) + b
+        Z = np.matmul(W, A) + b
         if i == L:
-            t = tf.exp(Z)
-            cache['A' + str(i)] = t / tf.reduce_sum(t, axis=0, keepdims=True)
+            t = np.exp(Z)
+            cache['A' + str(i)] = t / np.sum(t, axis=0, keepdims=True)
         else:
-            A = tf.nn.tanh(Z)
+            A = np.tanh(Z)
             D = np.random.rand(A.shape[0], A.shape[1])
-            D = D < keep_prob
-            A = tf.multiply(A, D)
+            D = np.where(D < keep_prob, 1, 0)
+            A = A * D
             A = A / keep_prob
             cache['D' + str(i)] = D
             cache['A' + str(i)] = A
