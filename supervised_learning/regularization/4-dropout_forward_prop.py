@@ -4,6 +4,7 @@ Forward propagation using Dropout
 """
 
 import tensorflow as tf
+import numpy as np
 
 
 def dropout_forward_prop(X, weights, L, keep_prob):
@@ -26,10 +27,14 @@ def dropout_forward_prop(X, weights, L, keep_prob):
         A = cache['A' + str(i - 1)]
         Z = tf.matmul(W, A) + b
         if i == L:
-            t = tf.nn.softmax(Z)
+            t = tf.exp(Z)
+            cache['A' + str(i)] = t / tf.reduce_sum(t, axis=0, keepdims=True)
         else:
             A = tf.nn.tanh(Z)
-            D = tf.nn.dropout(A, keep_prob)
+            D = np.random.rand(A.shape[0], A.shape[1])
+            D = D < keep_prob
+            A = tf.multiply(A, D)
+            A = A / keep_prob
             cache['D' + str(i)] = D
             cache['A' + str(i)] = A
     return cache
