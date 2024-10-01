@@ -40,35 +40,25 @@ def train_mini_batch(
         accuracy = tf.get_collection('accuracy')[0]
         train_op = tf.get_collection('train_op')[0]
 
-        m = X_train.shape[0]
-        if m % batch_size == 0:
-            num_batch = m // batch_size
-        else:
-            num_batch = m // batch_size + 1
+        for epoch in range(epochs):
+            X_shuffled, Y_shuffled = shuffle_data(X_train, Y_train)
+            for i in range(0, X_train.shape[0], batch_size):
+                X_batch = X_shuffled[i:i + batch_size]
+                Y_batch = Y_shuffled[i:i + batch_size]
+                sess.run(train_op, feed_dict={x: X_batch, y: Y_batch})
+                if i % 100 == 0:
+                    step_cost = sess.run(loss, feed_dict={x: X_batch, y: Y_batch})
+                    step_accuracy = sess.run(accuracy, feed_dict={x: X_batch, y: Y_batch})
+                    print("\tStep {}:".format(i), end="")
+                    print("\n\t\tCost: {}".format(step_cost), end="")
+                    print("\n\t\tAccuracy: {}".format(step_accuracy))
 
-        for epoch in range(epochs + 1):
-            train_cost = sess.run(loss, feed_dict={x: X_train, y: Y_train})
-            train_accuracy = sess.run(
-                accuracy, feed_dict={x: X_train, y: Y_train})
-            valid_cost = sess.run(
-                loss, feed_dict={x: X_valid, y: Y_valid})
-            valid_accuracy = sess.run(
-                accuracy, feed_dict={x: X_valid, y: Y_valid})
-            print("After {} epochs:".format(epoch))
-            print("\tTraining Cost: {}".format(train_cost))
-            print("\tTraining Accuracy: {}".format(train_accuracy))
-            print("\tValidation Cost: {}".format(valid_cost))
-            print("\tValidation Accuracy: {}".format(valid_accuracy))
+            valid_cost = sess.run(loss, feed_dict={x: X_valid, y: Y_valid})
+            valid_accuracy = sess.run(accuracy, feed_dict={x: X_valid, y: Y_valid})
+            print("After {} epochs:".format(epoch), end="")
+            print("\n\tTraining Cost: {}".format(step_cost), end="")
+            print("\n\tTraining Accuracy: {}".format(step_accuracy), end="")
+            print("\n\tValidation Cost: {}".format(valid_cost), end="")
+            print("\n\tValidation Accuracy: {}".format(valid_accuracy))
 
-            if epoch < epochs:
-                X_shuffled, Y_shuffled = shuffle_data(X_train, Y_train)
-                for i in range(num_batch):
-                    start = i * batch_size
-                    end = (i + 1) * batch_size
-                    if end > m:
-                        end = m
-                    sess.run(train_op, feed_dict={
-                        x: X_shuffled[start:end], y: Y_shuffled[start:end]})
-
-        save_path = saver.save(sess, save_path)
-    return save_path
+        return saver.save(sess, save_path)
