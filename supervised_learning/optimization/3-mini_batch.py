@@ -3,7 +3,6 @@
 Trains a loaded NN model using mini-batch gradient descent
 """
 
-import numpy as np
 import tensorflow as tf
 
 shuffle_data = __import__('2-shuffle_data').shuffle_data
@@ -49,9 +48,12 @@ def train_mini_batch(
 
         for epoch in range(epochs + 1):
             train_cost = sess.run(loss, feed_dict={x: X_train, y: Y_train})
-            train_accuracy = sess.run(accuracy, feed_dict={x: X_train, y: Y_train})
-            valid_cost = sess.run(loss, feed_dict={x: X_valid, y: Y_valid})
-            valid_accuracy = sess.run(accuracy, feed_dict={x: X_valid, y: Y_valid})
+            train_accuracy = sess.run(
+                accuracy, feed_dict={x: X_train, y: Y_train})
+            valid_cost = sess.run(
+                loss, feed_dict={x: X_valid, y: Y_valid})
+            valid_accuracy = sess.run(
+                accuracy, feed_dict={x: X_valid, y: Y_valid})
             print("After {} epochs:".format(epoch))
             print("\tTraining Cost: {}".format(train_cost))
             print("\tTraining Accuracy: {}".format(train_accuracy))
@@ -65,7 +67,8 @@ def train_mini_batch(
                     end = (i + 1) * batch_size
                     if end > m:
                         end = m
-                    sess.run(train_op, feed_dict={x: X_shuffled[start:end], y: Y_shuffled[start:end]})
+                    sess.run(train_op, feed_dict={
+                        x: X_shuffled[start:end], y: Y_shuffled[start:end]})
 
         save_path = saver.save(sess, save_path)
     return save_path
