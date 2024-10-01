@@ -28,6 +28,9 @@ def train_mini_batch(
     load_path: path from which to load the model
     save_path: path to where the model should be saved after training
 
+    After every 100 steps gradient descent within an epoch,
+    the following should be printed:
+
     Returns: the path where the model was saved
     """
     with tf.Session() as sess:
@@ -36,43 +39,53 @@ def train_mini_batch(
 
         x = tf.get_collection('x')[0]
         y = tf.get_collection('y')[0]
-        accuracy = tf.get_collection('accuracy')[0]
         loss = tf.get_collection('loss')[0]
+        accuracy = tf.get_collection('accuracy')[0]
         train_op = tf.get_collection('train_op')[0]
 
         m = X_train.shape[0]
-        if m % batch_size == 0:
-            num_batches = m // batch_size
-        else:
-            num_batches = m // batch_size + 1
+        steps = m // batch_size if m % batch_size == 0 else m // batch_size + 1
 
         for epoch in range(epochs + 1):
             X_shuffled, Y_shuffled = shuffle_data(X_train, Y_train)
 
-            train_loss = sess.run(
-                loss, feed_dict={x: X_train, y: Y_train})
-            train_accuracy = sess.run(
-                accuracy, feed_dict={x: X_train, y: Y_train})
-            valid_loss = sess.run(loss, feed_dict={x: X_valid, y: Y_valid})
-            valid_accuracy = sess.run(
-                accuracy, feed_dict={x: X_valid, y: Y_valid})
+            train_loss, train_accuracy = sess.run(
+                [loss, accuracy],
+                feed_dict={x: X_train, y: Y_train})
 
-            print("After {} epochs:".format(epoch))
-            print("\tTraining Cost: {}".format(train_loss))
-            print("\tTraining Accuracy: {}".format(train_accuracy))
-            print("\tValidation Cost: {}".format(valid_loss))
-            print("\tValidation Accuracy: {}".format(valid_accuracy))
+            valid_loss, valid_accuracy = sess.run(
+                [loss, accuracy],
+                feed_dict={x: X_valid, y: Y_valid})
+
+            print('After {} epochs:'.format(epoch))
+            print('\tTraining Cost: {}'.format(train_loss))
+            print('\tTraining Accuracy: {}'.format(train_accuracy))
+            print('\tValidation Cost: {}'.format(valid_loss))
+            print('\tValidation Accuracy: {}'.format(valid_accuracy))
 
             if epoch < epochs:
-                for i in range(num_batches):
-                    start = i * batch_size
-                    end = (i + 1) * batch_size
+                for step in range(steps):
+                    start = step * batch_size
+                    end = (step + 1) * batch_size
                     if end > m:
                         end = m
 
-                    X_batch = X_shuffled[start:end]
-                    Y_batch = Y_shuffled[start:end]
+                    sess.run(
+                        train_op,
+                        feed_dict={
+                            x: X_shuffled[start:end], y: Y_shuffled[
+                                start:end]}
+                            )
 
-                    sess.run(train_op, feed_dict={x: X_batch, y: Y_batch})
+                    if step % 100 == 0 and step > 0:
+                        step_loss, step_accuracy = sess.run(
+                            [loss, accuracy],
+                            feed_dict={
+                                x: X_shuffled[start:end], y: Y_shuffled[
+                                    start:end]})
+
+                        print('\tStep {}:'.format(step))
+                        print('\t\tCost: {}'.format(step_loss))
+                        print('\t\tAccuracy: {}'.format(step_accuracy))
 
         return saver.save(sess, save_path)
