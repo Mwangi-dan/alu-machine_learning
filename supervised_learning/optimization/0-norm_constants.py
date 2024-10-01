@@ -16,7 +16,4 @@ def normalization_constants(X):
 
     Returns: mean and standard deviation of each feature, respectively
     """
-    mean = np.mean(X, axis=1, keepdims=True)
-    std_dev = np.std(X, axis=1, keepdims=True)
-
-    return mean, std_dev
+    return np.mean(X, axis=1), np.std(X, axis=1)
