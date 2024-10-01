@@ -89,4 +89,4 @@ def train_mini_batch(
                     print("\t\tValidation Accuracy: {}".format(acc_v))
 
         save_path = saver.save(sess, save_path)
-    return save_path
+        return save_path
