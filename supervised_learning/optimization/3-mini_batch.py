@@ -58,30 +58,35 @@ def train_mini_batch(
         accuracy = tf.get_collection('accuracy')[0]
         loss = tf.get_collection('loss')[0]
         train_op = tf.get_collection('train_op')[0]
+        size = X_train.shape[0] // batch_size
+        if X_train.shape[0] % batch_size != 0:
+            size += 1
 
-        for epoch in range(epochs + 1):
-            X_shuffled, Y_shuffled = shuffle_data(X_train, Y_train)
-            loss_t, acc_t = sess.run(
-                [loss, accuracy], {x: X_train, y: Y_train})
-            loss_v, acc_v = sess.run(
-                [loss, accuracy], {x: X_valid, y: Y_valid})
-            print("After {} epochs:".format(epoch))
-            print("\tTraining Cost: {}".format(loss_t))
+        for i in range(epochs + 1):
+            cost_t, acc_t = sess.run(
+                [loss, accuracy], feed_dict={x: X_train, y: Y_train}
+            )
+            cost_v, acc_v = sess.run(
+                [loss, accuracy], feed_dict={x: X_valid, y: Y_valid}
+            )
+            print("After {} epochs:".format(i))
+            print("\tTraining Cost: {}".format(cost_t))
             print("\tTraining Accuracy: {}".format(acc_t))
-            print("\tValidation Cost: {}".format(loss_v))
+            print("\tValidation Cost: {}".format(cost_v))
             print("\tValidation Accuracy: {}".format(acc_v))
-
-            if epoch < epochs:
-                for i in range(0, X_train.shape[0], batch_size):
-                    X_batch = X_shuffled[i:i + batch_size]
-                    Y_batch = Y_shuffled[i:i + batch_size]
-                    sess.run(train_op, {x: X_batch, y: Y_batch})
-                    if i % 100 == 0:
-                        loss_t, acc_t = sess.run([loss, accuracy],
-                                                 {x: X_train, y: Y_train})
-                        print("\tStep {}:".format(i))
-                        print("\t\tCost: {}".format(loss_t))
-                        print("\t\tAccuracy: {}".format(acc_t))
-
-        save_path = saver.save(sess, save_path)
-    return save_path
+            if i < epochs:
+                x_shuffled, y_shuffled = shuffle_data(X_train, Y_train)
+                for i in range(size):
+                    start = i * batch_size
+                    end = start + batch_size
+                    x_mini = x_shuffled[start:end]
+                    y_mini = y_shuffled[start:end]
+                    sess.run(train_op, feed_dict={x: x_mini, y: y_mini})
+                    if (i + 1) % 100 == 0 and i > 0:
+                        cost, acc = sess.run(
+                            [loss, accuracy], feed_dict={x: x_mini, y: y_mini}
+                        )
+                        print("\tStep {}:".format(i + 1))
+                        print("\t\tCost: {}".format(cost))
+                        print("\t\tAccuracy: {}".format(acc))
+        return saver.save(sess, save_path)
