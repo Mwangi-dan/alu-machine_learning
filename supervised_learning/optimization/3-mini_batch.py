@@ -32,7 +32,7 @@ def train_mini_batch(
     the following should be printed:
 
     The training function should allow for a smaller final batch
-    1. import meta graph and restore session
+    1. meta graph and restore session
     2. Get the following tensors and ops from the collection restored
         x is a placeholder for the input data
         y is a placeholder for the labels
