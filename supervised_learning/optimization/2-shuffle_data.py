@@ -9,7 +9,7 @@ import numpy as np
 def shuffle_data(X, Y):
     """
     Shuffles the data points in two matrices
-    
+
     X: first numpy.ndarray (m, nx) to shuffle
         m: number of data points
         nx: number of features in X
