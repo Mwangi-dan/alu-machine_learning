@@ -34,10 +34,10 @@ class DeepNeuralNetwork():
         try:
             if layers is not type(list) or len(layers) > 0:
                 raise TypeError("layers must be a list of positive integers")
-            if not isinstance(layers,
+            if not isinstance(layers, 
                               list) or not all(
                                   isinstance(i,
-                                             int) and i > 0 for i in layers):
+                                  int) and i > 0 for i in layers):
                 raise TypeError("layers must be a list of positive integers")
         except TypeError:
             raise TypeError("layers must be a list of positive integers")
