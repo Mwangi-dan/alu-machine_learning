@@ -30,5 +30,5 @@ def availableShips(passengerCount):
                 if int(ship["passengers"]) >= passengerCount:
                     ships.append(ship["name"])
 
-    url = data["next"]
+            url = data["next"]
     return ships
