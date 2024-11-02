@@ -8,11 +8,10 @@ def list_all(mongo_collection):
     """
     Lists all documents in given MongoDB collection
 
-    parameters:
-        mongo_collection: the collection to use
+    
+    mongo_collection: the collection to use
 
-    returns:
-        list of all documents or 0 if no documents found
+    returns: list of all documents or 0 if no documents found
     """
     all_docs = []
     collection = mongo_collection.find()
