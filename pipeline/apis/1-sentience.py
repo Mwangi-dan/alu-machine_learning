@@ -15,14 +15,15 @@ def sentientPlanets():
     url = "https://swapi-api.hbtn.io/api/species/?format=json"
     speciesList = []
     while url:
-        response = requests.get(url)
-        data = response.json()
-        speciesList += data["results"]
-        url = data["next"]
+        results = requests.get(url).json()
+        speciesList += results.get('results')
+        url = results.get('next')
     homePlanets = []
     for species in speciesList:
-        if species["designation"] == "sentient" or\
-           species["classification"] == "sentient":
-            homePlanet = requests.get(species["homeworld"]).json()
-            homePlanets.append(homePlanet["name"])
+        if species.get('designation') == 'sentient' or \
+           species.get('classification') == 'sentient':
+            url = species.get('homeworld')
+            if url:
+                planet = requests.get(url).json()
+                homePlanets.append(planet.get('name'))
     return homePlanets
