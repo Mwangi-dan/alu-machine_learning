@@ -23,9 +23,7 @@ def userLocation(url):
         reset_in_minutes = int((reset_time - current_time) / 60)
         print("Reset in {} min".format(reset_in_minutes))
     else:
-        user = response.json()
-        location = user.get('location')
-        print(location)
+        print(response.json()["location"])
 
 
 if __name__ == "__main__":
