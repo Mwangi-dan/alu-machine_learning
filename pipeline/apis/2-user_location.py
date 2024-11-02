@@ -7,7 +7,7 @@ import time
 from datetime import datetime
 
 
-def main(url):
+def userLocation(url):
     """
     url: User id passed as first argument of the script
 
@@ -16,17 +16,19 @@ def main(url):
     response = requests.get(url)
 
     if response.status_code == 404:
-        print("Not found")
+        print("Not Found")
     elif response.status_code == 403:
-        reset_timestamp = int(response.headers["X-Ratelimit-Reset"])
-        current_timestamp = int(time.time())
-        reset_in_minutes = (reset_timestamp - current_timestamp) // 60
+        reset_time = int(response.headers['X-Ratelimit-Reset'])
+        current_time = int(time.time())
+        reset_in_minutes = int((reset_time - current_time) / 60)
         print("Reset in {} min".format(reset_in_minutes))
     else:
-        print(response.json()["location"])
+        user = response.json()
+        location = user.get('location')
+        print(location)
 
 
 if __name__ == "__main__":
     import sys
 
-    main(sys.argv[1])
+    userLocation(sys.argv[1])
